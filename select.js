@@ -14,8 +14,8 @@ const SELECT = 'SELECT';
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: '#BDBDC1',
-    borderWidth: 2 / window.scale
+    // borderColor: '#BDBDC1',
+    // borderWidth: 2 / window.scale
   }
 });
 
@@ -53,7 +53,7 @@ class Select extends Component {
 
   _onPress() {
     const { optionListRef, children, onSelect, width, height } = this.props;
-
+    debugger
     if (!children.length) {
       return false;
     }
@@ -82,7 +82,7 @@ class Select extends Component {
 
     return (
       <TouchableWithoutFeedback onPress={this._onPress.bind(this)}>
-        <View ref={SELECT} style={[styles.container, dimensions, style ]}>
+        <View ref={SELECT} style={[styles.container, style ]}>
           <Option style={ styleOption } styleText={ styleText }>{this.state.value}</Option>
         </View>
       </TouchableWithoutFeedback>

@@ -23,11 +23,6 @@ const styles = StyleSheet.create({
     borderColor: '#BDBDC1',
     borderWidth: 1,
     backgroundColor : "#ffffff"
-  },
-  contentContainer :{
-    flexDirection:'column',
-    justifyContent:'center', 
-    alignItems:'center'
   }
 });
 
@@ -57,7 +52,7 @@ class Items extends Component {
 
   render() {
     const { items, positionX, positionY, show, onPress, width, height } = this.props;
-
+    debugger
     if (!show) {
       return null;
     }
@@ -66,7 +61,7 @@ class Items extends Component {
     let scrollViewHeight = this.state.height;
 
     const renderedItems = React.Children.map(items, (item) => {
-
+      debugger
       return (
         <TouchableWithoutFeedback onPress={() => onPress(item.props.children, item.props.value) }>
           <View>

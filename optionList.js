@@ -31,7 +31,8 @@ class OptionList extends Component {
     };
   }
 
-  _currentPosition(pageX, pageY) {
+  _currentPosition(pageX, pageY, currentWidth, currentHeight) {
+    debugger
     this.setState({
       ...this.state,
       pageX,
@@ -39,10 +40,12 @@ class OptionList extends Component {
     });
   }
 
-  _show(items, positionX, positionY, width, height, onSelect) {
+  _show(items, positionX, positionY, currentWidth, currentHeight, onSelect) {
     positionX = positionX - this.state.pageX;
     positionY = positionY - this.state.pageY;
-
+    width = currentWidth
+    height = currentHeight
+    debugger
     this.setState({
       ...this.state,
       positionX,

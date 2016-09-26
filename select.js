@@ -25,6 +25,8 @@ class Select extends Component {
 
     this.pageX = 0;
     this.pageY = 0;
+    this.optionListWidth = 0;
+    this.optionListHeight = 0;
 
     let defaultValue = props.defaultValue;
 
@@ -46,9 +48,12 @@ class Select extends Component {
     this.setState({ value: defaultValue });
   }
 
-  _currentPosition(pageX, pageY) {
+  _currentPosition(pageX, pageY, optionListWidth, optionListHeight) {
     this.pageX = pageX;
-    this.pageY = pageY + this.props.height;
+    this.pageY = pageY + optionListHeight;
+    debugger
+    this.optionListWidth = optionListWidth;
+    this.optionListHeight = optionListHeight;
   }
 
   _onPress() {
@@ -57,7 +62,7 @@ class Select extends Component {
     if (!children.length) {
       return false;
     }
-    optionListRef()._show(children, this.pageX, this.pageY, width, height, (item, value=item) => {
+    optionListRef()._show(children, this.pageX, this.pageY, this.optionListWidth, this.optionListHeight, (item, value=item) => {
       if (item) {
         onSelect(value);
         this.setState({
@@ -70,19 +75,10 @@ class Select extends Component {
   render() {
     const { width, height, children, defaultValue, style, styleOption, styleText } = this.props;
     const dimensions = { width, height };
-    // let dimensions;
-    // if(width === 0) {
-    //   dimensions = {height};
-    // } else if(height === 0) {
-    //   dimensions = {width};
-    // } else {
-    //   dimensions = { width, height };
-    // }
-    // debugger
 
     return (
       <TouchableWithoutFeedback onPress={this._onPress.bind(this)}>
-        <View ref={SELECT} style={[styles.container, style ]}>
+        <View ref={SELECT} style={[styles.container, dimensions, style ]}>
           <Option style={ styleOption } styleText={ styleText }>{this.state.value}</Option>
         </View>
       </TouchableWithoutFeedback>
@@ -98,8 +94,6 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  width: 200,
-  height: 40,
   onSelect: () => { }
 };
 

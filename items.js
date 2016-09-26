@@ -16,7 +16,7 @@ const window = Dimensions.get('window');
 const styles = StyleSheet.create({
   scrollView: {
     height: 120,
-    width: 198 //TODO: this needs to be dynamic
+    width: 128 //TODO: this needs to be dynamic
   },
   container: {
     position:'absolute',
@@ -35,6 +35,8 @@ class Items extends Component {
   }
 
   updateItemHeight(height) {
+    debugger
+    let numberOfItems = React.Children.count(this.props.items);
     Animated.timing(this.state.height, {
         toValue: height * 2,
         duration: 200,
@@ -57,7 +59,7 @@ class Items extends Component {
       return null;
     }
 
-    let scrollViewWidth = width - 2;
+    let scrollViewWidth = width;
     let scrollViewHeight = this.state.height;
 
     const renderedItems = React.Children.map(items, (item) => {

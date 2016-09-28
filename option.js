@@ -17,8 +17,7 @@ class Option extends Component {
   }
 
   render() {
-    const { style, styleText } = this.props;
-    debugger
+    let { style, styleText } = this.props;
     return (
       <View style={[ styles.container, style ]}>
         <Text style={ styleText }>{this.props.children}</Text>

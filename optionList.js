@@ -32,7 +32,6 @@ class OptionList extends Component {
   }
 
   _currentPosition(pageX, pageY, currentWidth, currentHeight) {
-    debugger
     this.setState({
       ...this.state,
       pageX,
@@ -41,17 +40,17 @@ class OptionList extends Component {
   }
 
   _show(items, positionX, positionY, currentWidth, currentHeight, onSelect) {
+    debugger
     positionX = positionX - this.state.pageX;
     positionY = positionY - this.state.pageY;
-    width = currentWidth
-    height = currentHeight
-    debugger
+    let width = currentWidth
+    let hx = currentHeight
     this.setState({
       ...this.state,
       positionX,
       positionY,
-      width,
-      height,
+      width : currentWidth,
+      height : currentHeight,
       items,
       onSelect,
       show: true
@@ -59,7 +58,7 @@ class OptionList extends Component {
   }
 
   _onOverlayPress() {
-    const { onSelect } = this.state;
+    let { onSelect } = this.state;
     onSelect(null, null);
 
     this.setState({
@@ -69,7 +68,7 @@ class OptionList extends Component {
   }
 
   _onItemPress(item, value) {
-    const { onSelect } = this.state;
+    let { onSelect } = this.state;
     onSelect(item, value);
 
     this.setState({
@@ -79,7 +78,7 @@ class OptionList extends Component {
   }
 
   render() {
-    const {
+    let {
       items,
       pageX,
       pageY,
@@ -89,9 +88,10 @@ class OptionList extends Component {
       height,
       show
     } = this.state;
-    const {
+    let {
       overlayStyles
     } = this.props;
+    debugger
     return (
       <View>
         <Overlay

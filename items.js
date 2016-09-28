@@ -23,6 +23,15 @@ const styles = StyleSheet.create({
     borderColor: '#BDBDC1',
     borderWidth: 1,
     backgroundColor : "#ffffff"
+  },
+  shadow: {
+    shadowColor: "#000000",
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   }
 });
 
@@ -34,27 +43,39 @@ class Items extends Component {
     };
   }
 
-  updateItemHeight(height) {
+  updateItemHeight(height, items) {
     debugger
-    let numberOfItems = React.Children.count(this.props.items);
+    //let numberOfItems = React.Children.count(this.props.items);
+    let numberOfItems = 0;
+    if(items.length) {
+      numberOfItems = items.length < 4 ? items.length : 3
+    }
     Animated.timing(this.state.height, {
-        toValue: height * 2,
+        toValue: height * numberOfItems,
         duration: 200,
         easing :  Easing.linear
     }).start();
   }
 
   componentDidMount() {
-    this.updateItemHeight(this.props.height)
+    //this.updateItemHeight(this.props.height, this.props.items)
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateItemHeight(nextProps.height)
+    debugger
+    if(this.props.show && !nextProps.show) {
+      let height = new Animated.Value(0);
+      this.setState({
+        ...this.state,
+        height
+      });
+    } else {
+      this.updateItemHeight(nextProps.height, nextProps.items)
+    }
   }
 
   render() {
-    const { items, positionX, positionY, show, onPress, width, height } = this.props;
-    debugger
+    let { items, positionX, positionY, show, onPress, width, height } = this.props;
     if (!show) {
       return null;
     }
@@ -62,7 +83,7 @@ class Items extends Component {
     let scrollViewWidth = width;
     let scrollViewHeight = this.state.height;
 
-    const renderedItems = React.Children.map(items, (item) => {
+    let renderedItems = React.Children.map(items, (item) => {
       debugger
       return (
         <TouchableWithoutFeedback onPress={() => onPress(item.props.children, item.props.value) }>
@@ -72,10 +93,9 @@ class Items extends Component {
         </TouchableWithoutFeedback>
       );
     });
-    debugger
     return (
         <AnimatedScrollView
-          style={[styles.container, { top: positionY, left: positionX, width: scrollViewWidth, height: scrollViewHeight }]}
+          style={[styles.container, styles.shadow, { top: positionY, left: positionX, width: scrollViewWidth, height: scrollViewHeight }]}
           contentContainerStyle={styles.contentContainer}
           automaticallyAdjustContentInsets={false}
           bounces={false}>

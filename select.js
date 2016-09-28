@@ -44,7 +44,7 @@ class Select extends Component {
   }
 
   reset() {
-    const { defaultValue } = this.props;
+    let { defaultValue } = this.props;
     this.setState({ value: defaultValue });
   }
 
@@ -57,8 +57,7 @@ class Select extends Component {
   }
 
   _onPress() {
-    const { optionListRef, children, onSelect, width, height } = this.props;
-    debugger
+    let { optionListRef, children, onSelect, width, height } = this.props;
     if (!children.length) {
       return false;
     }
@@ -73,8 +72,8 @@ class Select extends Component {
   }
 
   render() {
-    const { width, height, children, defaultValue, style, styleOption, styleText } = this.props;
-    const dimensions = { width, height };
+    let { width, height, children, defaultValue, style, styleOption, styleText } = this.props;
+    let dimensions = { width, height };
 
     return (
       <TouchableWithoutFeedback onPress={this._onPress.bind(this)}>

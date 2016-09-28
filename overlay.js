@@ -33,7 +33,7 @@ class Overlay extends Component {
   }
 
   render() {
-    const { pageX, pageY, show, onPress, overlayStyles } = this.props;
+    let { pageX, pageY, show, onPress, overlayStyles } = this.props;
 
     if (!show) {
       return null

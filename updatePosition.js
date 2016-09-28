@@ -5,7 +5,6 @@ module.exports = function (ref) {
   const handle = findNodeHandle(ref);
   setTimeout(() => {
     NativeModules.UIManager.measure(handle, (x, y, width, height, pageX, pageY) => {
-    	debugger
         console.log(ref)
         console.log("MEASUREMENTS")
         console.log(x, y, width, height, pageX, pageY);

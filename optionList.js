@@ -6,6 +6,8 @@ import {
   Dimensions,
   StyleSheet,
   View,
+  NativeModules,
+  findNodeHandle
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -31,29 +33,24 @@ class OptionList extends Component {
     };
   }
 
-  _currentPosition(pageX, pageY, currentWidth, currentHeight) {
-    this.setState({
-      ...this.state,
-      pageX,
-      pageY
-    });
-  }
-
   _show(items, positionX, positionY, currentWidth, currentHeight, onSelect) {
-    debugger
-    positionX = positionX - this.state.pageX;
-    positionY = positionY - this.state.pageY;
-    let width = currentWidth
-    let hx = currentHeight
-    this.setState({
-      ...this.state,
-      positionX,
-      positionY,
-      width : currentWidth,
-      height : currentHeight,
-      items,
-      onSelect,
-      show: true
+    let handle = findNodeHandle(this);
+    let that = this;
+    NativeModules.UIManager.measure(handle, (x, y, width, height, pageX, pageY) => {
+        positionX = positionX - pageX;
+        positionY = positionY - pageY;
+        that.setState({
+          ...that.state,
+          positionX,
+          positionY,
+          pageX,
+          pageY,
+          width : currentWidth,
+          height : currentHeight,
+          items,
+          onSelect,
+          show: true
+        });
     });
   }
 
@@ -89,9 +86,9 @@ class OptionList extends Component {
       show
     } = this.state;
     let {
-      overlayStyles
+      overlayStyles,
+      useSelectHeight
     } = this.props;
-    debugger
     return (
       <View>
         <Overlay
@@ -107,6 +104,7 @@ class OptionList extends Component {
           width={width}
           height={height}
           show={show}
+          useSelectHeight={useSelectHeight}
           onPress={ this._onItemPress.bind(this) }/>
       </View>
     );

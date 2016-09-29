@@ -4,10 +4,12 @@ import {
   View,
   Text,
 } from 'react-native';
+const Constants = require('./constants');
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    padding: Constants.OPTION_PADDING,
+    height:Constants.OPTION_HEIGHT
   }
 });
 

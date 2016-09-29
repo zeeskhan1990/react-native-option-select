@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  NativeModules,
+  findNodeHandle
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -22,11 +24,6 @@ const styles = StyleSheet.create({
 class Select extends Component {
   constructor(props) {
     super(props);
-
-    this.pageX = 0;
-    this.pageY = 0;
-    this.optionListWidth = 0;
-    this.optionListHeight = 0;
 
     let defaultValue = props.defaultValue;
 
@@ -48,26 +45,22 @@ class Select extends Component {
     this.setState({ value: defaultValue });
   }
 
-  _currentPosition(pageX, pageY, optionListWidth, optionListHeight) {
-    this.pageX = pageX;
-    this.pageY = pageY + optionListHeight;
-    debugger
-    this.optionListWidth = optionListWidth;
-    this.optionListHeight = optionListHeight;
-  }
-
   _onPress() {
     let { optionListRef, children, onSelect, width, height } = this.props;
     if (!children.length) {
       return false;
     }
-    optionListRef()._show(children, this.pageX, this.pageY, this.optionListWidth, this.optionListHeight, (item, value=item) => {
-      if (item) {
-        onSelect(value);
-        this.setState({
-          value: item
+    let handle = findNodeHandle(this)
+    let that = this;
+    NativeModules.UIManager.measure(handle, (x, y, width, height, pageX, pageY) => {
+        optionListRef()._show(children, pageX, pageY + height, width, height, (item, value=item) => {
+          if (item) {
+            onSelect(value);
+            that.setState({
+              value: item
+            });
+          }
         });
-      }
     });
   }
 

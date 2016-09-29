@@ -10,14 +10,11 @@ import {
   Animated,
 } from 'react-native';
 
+const Constants = require('./constants');
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  scrollView: {
-    height: 120,
-    width: 128 //TODO: this needs to be dynamic
-  },
   container: {
     position:'absolute',
     borderColor: '#BDBDC1',
@@ -26,7 +23,7 @@ const styles = StyleSheet.create({
   },
   shadow: {
     shadowColor: "#000000",
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowRadius: 1,
     shadowOffset: {
       height: 1,
@@ -44,11 +41,13 @@ class Items extends Component {
   }
 
   updateItemHeight(height, items) {
-    debugger
-    //let numberOfItems = React.Children.count(this.props.items);
     let numberOfItems = 0;
     if(items.length) {
       numberOfItems = items.length < 4 ? items.length : 3
+    }
+    debugger
+    if(!this.props.useSelectHeight) {
+      height = Constants.OPTION_HEIGHT
     }
     Animated.timing(this.state.height, {
         toValue: height * numberOfItems,
@@ -62,7 +61,6 @@ class Items extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
     if(this.props.show && !nextProps.show) {
       let height = new Animated.Value(0);
       this.setState({
@@ -70,6 +68,7 @@ class Items extends Component {
         height
       });
     } else {
+      //Sending the select height along with the number of items
       this.updateItemHeight(nextProps.height, nextProps.items)
     }
   }
@@ -80,11 +79,10 @@ class Items extends Component {
       return null;
     }
 
-    let scrollViewWidth = width;
+    let scrollViewWidth = width - 2;
     let scrollViewHeight = this.state.height;
 
     let renderedItems = React.Children.map(items, (item) => {
-      debugger
       return (
         <TouchableWithoutFeedback onPress={() => onPress(item.props.children, item.props.value) }>
           <View>

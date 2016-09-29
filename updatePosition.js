@@ -3,11 +3,13 @@ import { NativeModules, findNodeHandle } from 'react-native';
 
 module.exports = function (ref) {
   const handle = findNodeHandle(ref);
+  debugger
   setTimeout(() => {
     NativeModules.UIManager.measure(handle, (x, y, width, height, pageX, pageY) => {
         console.log(ref)
         console.log("MEASUREMENTS")
         console.log(x, y, width, height, pageX, pageY);
+        debugger
       ref._currentPosition(pageX, pageY, width, height);
     });
   }, 0);

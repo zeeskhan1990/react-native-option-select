@@ -94,31 +94,31 @@ AppRegistry.registerComponent('App', () => App);
 
 ##### Select:
 | Property | Type | Default | Description | Mandatory
-|---------------|----------|--------------|----------------------------------------------------------------|
-| width | number | 400 | Width of the selection | No
-| onSelect | function(text, value) | null | function to be invoked when option is selected | Yes
-| height | number | 50 | Height of the selection | No
-| optionListRef | function | required | Reference to ```<OptionList />``` to display the selection menu | Yes
-| style | object | null | Custom styles to be applied to the select container element if supplied | No
-| styleOption | object | null | Custom styles to be applied to the option element displayed on select if supplied | No
-| styleText | object | null | Custom styles to be applied to the text of the option element displayed on select if supplied | No
-| defaultValue | string | first option | The value to be displayed if none of the options are selected. | Yes
+|---------------|----------|--------------|----------------------------------------------------------------|----------|
+| width | number | 400 | Width of the selection | No |
+| onSelect | function(text, value) | null | function to be invoked when option is selected | Yes |
+| height | number | 50 | Height of the selection | No |
+| optionListRef | function | required | Reference to ```<OptionList />``` to display the selection menu | Yes |
+| style | object | null | Custom styles to be applied to the select container element if supplied | No |
+| styleOption | object | null | Custom styles to be applied to the option element displayed on select if supplied | No |
+| styleText | object | null | Custom styles to be applied to the text of the option element displayed on select if supplied | No |
+| defaultValue | string | first option | The value to be displayed if none of the options are selected. | Yes |
 
 ##### Option:
 
 | Property | Type | Default | Description | Mandatory
-|-----------|--------|---------|--------------------------------------------|
-| value | any |  null | value will be passed on callback `onSelect` as second argument  | yes
-| style | object | null | Styles to be applied on 'Option' component | No
-| styleText | object |  null | Styles to be applied on text inside of 'Option'  | No
+|-----------|--------|---------|--------------------------------------------|----------|
+| value | any |  null | value will be passed on callback `onSelect` as second argument  | Yes |
+| style | object | null | Styles to be applied on 'Option' component | No |
+| styleText | object |  null | Styles to be applied on text inside of 'Option'  | No |
 
 
 ##### OptionList:
 
 | Property | Type | Default | Description | Mandatory
-|-----------|--------|---------|--------------------------------------------|
-| overlayStyles | object | null | Styles to be applied on 'overlay' backdrop | No
-| useSelectHeight | object | null | If set to true, then each option element will take height equal to the height of the select element on the opening of the dropdown | No
+|-----------|--------|---------|--------------------------------------------|----------|
+| overlayStyles | object | null | Styles to be applied on 'overlay' backdrop | No |
+| useSelectHeight | object | null | If set to true, then each option element will take height equal to the height of the select element on the opening of the dropdown | No |
 
 
 ## Demo

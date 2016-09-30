@@ -1,0 +1,27 @@
+{
+  "name": "react-native-option-select",
+  "version": "1.0.0",
+  "description": "A flexible Select dropdown menu for react-native",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeeskhan1990/react-native-option-select.git"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "react-native-option-select",
+    "dropdown",
+    "ios",
+    "android"
+  ],
+  "author": "ZeeshanK <zeeskhan1990@gmail.com> (https://github.com/zeeskhan1990)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeeskhan1990/react-native-option-select/issues"
+  },
+  "homepage": "https://github.com/zeeskhan1990/react-native-option-select"
+}
